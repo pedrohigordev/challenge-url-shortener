@@ -1,8 +1,8 @@
 import {
   Body,
-  ConflictException,
   Controller,
   HttpCode,
+  NotFoundException,
   Put,
   UseGuards,
   UsePipes,
@@ -38,7 +38,7 @@ export class EditUrlController {
     })
 
     if (!url) {
-      throw new ConflictException('URl not exists')
+      throw new NotFoundException('URl not exists')
     }
 
     await this.prisma.url.update({
