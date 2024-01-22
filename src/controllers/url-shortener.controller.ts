@@ -1,8 +1,9 @@
-import { Body, Controller, Post, UsePipes } from '@nestjs/common'
+import { Body, Controller, Post, UseGuards, UsePipes } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { z } from 'zod'
 import { ZoodValidationPipe } from 'src/pipes/zod-validation-pipe'
 import * as shortid from 'shortid'
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 
 const shortenBodySchema = z.object({
   url: z.string().url(),
@@ -11,6 +12,7 @@ const shortenBodySchema = z.object({
 type ShortenBodySchema = z.infer<typeof shortenBodySchema>
 
 @Controller('/shorten')
+@UseGuards(JwtAuthGuard)
 export class UrlShortenerController {
   constructor(private prisma: PrismaService) {}
 
