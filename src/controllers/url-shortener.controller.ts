@@ -15,7 +15,6 @@ export class UrlShortenerController {
   constructor(private prisma: PrismaService) {}
 
   private readonly urlDatabase: Record<string, string> = {}
-  private readonly nanoid = shortid.generate
 
   @Post()
   @UsePipes(new ZoodValidationPipe(shortenBodySchema))
