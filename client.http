@@ -20,3 +20,13 @@ Content-Type: application/json
     "email": "fulano@gmail.com",
     "password": "123456"
 }
+
+###
+
+# @name shorten_url
+POST {{baseUrl}}/shorten
+Content-Type: application/json
+
+{
+    "url": "https://teddy360.com.br/material/marco-legal-das-garantias-sancionado-entenda-o-que-muda/"
+}

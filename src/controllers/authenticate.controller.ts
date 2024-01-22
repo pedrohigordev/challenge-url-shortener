@@ -17,6 +17,7 @@ const authenticateBodySchema = z.object({
 })
 
 type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
+
 @Controller('/sessions')
 export class AuthenticateController {
   constructor(
