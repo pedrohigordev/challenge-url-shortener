@@ -6,6 +6,7 @@ import { envSchema } from './env'
 import { AuthModule } from './auth/auth.module'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { UrlShortenerController } from './controllers/url-shortener.controller'
+import { EditUrlController } from './controllers/edit-original-url.controller'
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UrlShortenerController } from './controllers/url-shortener.controller'
     CreateAccountController,
     AuthenticateController,
     UrlShortenerController,
+    EditUrlController,
   ],
   providers: [PrismaService],
 })

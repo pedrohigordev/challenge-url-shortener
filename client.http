@@ -33,3 +33,16 @@ Authorization: Bearer {{auth_token}}
 {
     "url": "https://teddy360.com.br/material/marco-legal-das-garantias-sancionado-entenda-o-que-muda/"
 }
+
+
+###
+
+# @name update_url_destiny
+PUT {{baseUrl}}/shorten
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "urlId": "3887f4cf-12c8-4188-91dd-e5c99ed675f8",
+    "newdestinyUrl": "https://app.rocketseat.com.br/classroom/nest-js/group/fundamentos-do-nest/lesson/criando-decorator-de-autenticacao"
+}
