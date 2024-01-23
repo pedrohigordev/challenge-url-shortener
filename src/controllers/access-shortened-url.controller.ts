@@ -33,7 +33,5 @@ export class AccessUrlShortenedController {
         visits: ++hashAlreadyExists.visits,
       },
     })
-
-    return hashAlreadyExists
   }
 }
