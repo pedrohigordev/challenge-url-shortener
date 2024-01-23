@@ -6,7 +6,7 @@ import { hash } from 'bcryptjs'
 import { randomUUID } from 'crypto'
 import request from 'supertest'
 
-describe('List URLs (E2E)', () => {
+describe('Edit original URL (E2E)', () => {
   let app: INestApplication
 
   let prisma: PrismaService
@@ -23,8 +23,9 @@ describe('List URLs (E2E)', () => {
     await app.init()
   })
 
-  test('List Urls', async () => {
+  test('[put] /shorten', async () => {
     const userId = randomUUID()
+    const urlId = randomUUID()
 
     await prisma.user.create({
       data: {
@@ -37,18 +38,9 @@ describe('List URLs (E2E)', () => {
 
     await prisma.url.create({
       data: {
-        id: randomUUID(),
+        id: urlId,
         original_url: 'https://google.com.br/accounts',
         hash: 'gBtyar',
-        userId,
-      },
-    })
-
-    await prisma.url.create({
-      data: {
-        id: randomUUID(),
-        original_url: 'https://google.com.br/accounts',
-        hash: 'UtYakj',
         userId,
       },
     })
@@ -61,9 +53,21 @@ describe('List URLs (E2E)', () => {
       })
 
     const response = await request(app.getHttpServer())
-      .get('/shorten')
+      .put('/shorten')
       .set('Authorization', `Bearer ${authentication.body.access_token}`)
+      .send({
+        urlId,
+        newdestinyUrl: 'https://docs.nestjs.com/',
+      })
 
-    expect(response.body.length).toEqual(2)
+    const findUrlUpdated = await prisma.url.findFirst({
+      where: {
+        original_url: 'https://docs.nestjs.com/',
+      },
+    })
+
+    expect(response.statusCode).toBe(200)
+    expect(findUrlUpdated).toBeDefined()
+    expect(findUrlUpdated?.original_url).toBe('https://docs.nestjs.com/')
   })
 })
