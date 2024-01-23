@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 const hashQuerySchema = z.object({
   accessHash: z.string(),
-  url: z.string().nullable(),
+  url: z.string(),
 })
 
 type HashQuerySchema = z.infer<typeof hashQuerySchema>
@@ -15,6 +15,11 @@ export class AccessUrlShortenedController {
 
   @Get()
   async handle(@Query() hash: HashQuerySchema) {
+    if (hash.url) {
+      const urlSplited = hash.url.split('/')
+      hash.accessHash = urlSplited[urlSplited.length - 1]
+    }
+
     const hashAlreadyExists = await this.prisma.url.findFirst({
       where: {
         hash: hash.accessHash,
@@ -24,7 +29,16 @@ export class AccessUrlShortenedController {
       },
     })
 
-    if (!hashAlreadyExists) throw new NotFoundException('Url not found')
+    if (!hashAlreadyExists) throw new NotFoundException('Address not found.')
+
+    await this.prisma.url.update({
+      where: {
+        id: hashAlreadyExists.id,
+      },
+      data: {
+        visits: ++hashAlreadyExists.visits,
+      },
+    })
 
     return hashAlreadyExists
   }

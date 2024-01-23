@@ -66,6 +66,6 @@ Authorization: Bearer {{auth_token}}
 ###
 
 # @name access_url_shortened
-GET  {{baseUrl}}/access-shortened?hash=sOGy3B
+GET  {{baseUrl}}/access-shortened?url=http://localhost/sOGy3B
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}

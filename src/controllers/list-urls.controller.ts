@@ -18,6 +18,14 @@ export class ListUrlsController {
           equals: null,
         },
       },
+      select: {
+        id: true,
+        original_url: true,
+        hash: true,
+        userId: true,
+        visits: true,
+        updatedAt: true,
+      },
     })
   }
 }
