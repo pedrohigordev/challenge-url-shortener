@@ -8,6 +8,7 @@ import { AuthenticateController } from './controllers/authenticate.controller'
 import { UrlShortenerController } from './controllers/url-shortener.controller'
 import { EditUrlController } from './controllers/edit-original-url.controller'
 import { DeleteUrlController } from './controllers/delete-url-shortened.controller'
+import { ListUrlsController } from './controllers/list-urls.controller'
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { DeleteUrlController } from './controllers/delete-url-shortened.controll
     UrlShortenerController,
     EditUrlController,
     DeleteUrlController,
+    ListUrlsController,
   ],
   providers: [PrismaService],
 })

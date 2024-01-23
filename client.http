@@ -50,7 +50,14 @@ Authorization: Bearer {{auth_token}}
 ###
 
 # @name delete_url
-DELETE  {{baseUrl}}/shorten?urlId=3887f4cf-12c8-4188-91dd-e5c99ed675f8
+DELETE  {{baseUrl}}/shorten?urlId=b06655dc-7571-4b75-b774-77e4c817bc43
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
+
+###
+
+# @name list_urls
+GET  {{baseUrl}}/shorten
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
