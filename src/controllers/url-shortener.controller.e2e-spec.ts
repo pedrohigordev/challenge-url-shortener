@@ -6,7 +6,7 @@ import { hash } from 'bcryptjs'
 import { randomUUID } from 'crypto'
 import request from 'supertest'
 
-describe('Access shortened url (E2E)', () => {
+describe('Shorten a URL (E2E)', () => {
   let app: INestApplication
 
   let prisma: PrismaService
@@ -23,9 +23,8 @@ describe('Access shortened url (E2E)', () => {
     await app.init()
   })
 
-  test('[DELETE] /shorten', async () => {
+  test('Shorten a URL', async () => {
     const userId = randomUUID()
-    const urlId = randomUUID()
 
     await prisma.user.create({
       data: {
@@ -36,27 +35,35 @@ describe('Access shortened url (E2E)', () => {
       },
     })
 
-    await prisma.url.create({
-      data: {
-        id: urlId,
-        original_url: 'https://google.com.br/accounts',
-        hash: 'gBtyar',
-        userId,
-      },
-    })
+    const authentication = await request(app.getHttpServer())
+      .post('/sessions')
+      .send({
+        email: 'fulano@gmail.com',
+        password: '123456',
+      })
 
-    const response = await request(app.getHttpServer()).get(`/gBtyar`)
+    const response = await request(app.getHttpServer())
+      .post('/shorten')
+      .send({
+        url: 'http://google.com.br/accunts/devoices/manager',
+      })
+      .set('Authorization', `Bearer ${authentication.body.access_token}`)
+
+    const hashCode = response.body.shortened_url.split('/')
+    const code = hashCode[hashCode.length - 1]
+
+    await request(app.getHttpServer()).get(`/${code}`)
 
     const numberOfVisits = await prisma.url.findFirst({
       where: {
-        id: urlId,
+        hash: code,
       },
       select: {
         visits: true,
       },
     })
 
-    expect(response.statusCode).toBe(200)
+    expect(response.statusCode).toBe(201)
     expect(numberOfVisits?.visits).toEqual(1)
   })
 })

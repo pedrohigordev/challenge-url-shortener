@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
 import { PrismaService } from '@/prisma/prisma.service'
 import * as shortid from 'shortid'
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard'
@@ -24,6 +24,7 @@ export class UrlShortenerController {
   }
 
   @Post()
+  @HttpCode(201)
   async handle(@Body() body: OriginalUrl, @CurrentUser() user: UserPayload) {
     const { url } = body
     const longId = shortid.generate()
