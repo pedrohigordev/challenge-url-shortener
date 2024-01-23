@@ -27,6 +27,14 @@ export class AccessUrlShortenedController {
           equals: null,
         },
       },
+      select: {
+        id: true,
+        original_url: true,
+        hash: true,
+        userId: true,
+        visits: true,
+        updatedAt: true,
+      },
     })
 
     if (!hashAlreadyExists) throw new NotFoundException('Address not found.')
