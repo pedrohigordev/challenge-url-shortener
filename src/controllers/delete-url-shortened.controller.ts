@@ -7,10 +7,10 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
-import { ZoodValidationPipe } from 'src/pipes/zod-validation-pipe'
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
+import { ZoodValidationPipe } from '@/pipes/zod-validation-pipe'
+import { JwtAuthGuard } from '@/auth/jwt-auth.guard'
 
 const deleteUrlQuerySchema = z.object({
   urlId: z.string(),

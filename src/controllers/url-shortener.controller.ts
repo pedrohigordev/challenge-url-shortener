@@ -1,11 +1,11 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from '@/prisma/prisma.service'
 import * as shortid from 'shortid'
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
-import { UserPayload } from 'src/auth/jwt.strategy'
-import { CurrentUser } from 'src/auth/current-user-decorator'
+import { JwtAuthGuard } from '@/auth/jwt-auth.guard'
+import { UserPayload } from '@/auth/jwt.strategy'
+import { CurrentUser } from '@/auth/current-user-decorator'
 import { ConfigService } from '@nestjs/config'
-import { Env } from 'src/env'
+import { Env } from '@/env'
 
 interface OriginalUrl {
   url: string

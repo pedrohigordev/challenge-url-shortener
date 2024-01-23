@@ -1,5 +1,5 @@
 import { Controller, Get, NotFoundException, Query } from '@nestjs/common'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
 
 const hashQuerySchema = z.object({
