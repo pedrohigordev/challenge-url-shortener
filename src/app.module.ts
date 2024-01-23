@@ -9,6 +9,7 @@ import { UrlShortenerController } from './controllers/url-shortener.controller'
 import { EditUrlController } from './controllers/edit-original-url.controller'
 import { DeleteUrlController } from './controllers/delete-url-shortened.controller'
 import { ListUrlsController } from './controllers/list-urls.controller'
+import { AccessUrlShortenedController } from './controllers/access-shortened-url.controller'
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ListUrlsController } from './controllers/list-urls.controller'
     EditUrlController,
     DeleteUrlController,
     ListUrlsController,
+    AccessUrlShortenedController,
   ],
   providers: [PrismaService],
 })

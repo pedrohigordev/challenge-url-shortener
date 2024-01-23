@@ -61,3 +61,11 @@ Authorization: Bearer {{auth_token}}
 GET  {{baseUrl}}/shorten
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
+
+
+###
+
+# @name access_url_shortened
+GET  {{baseUrl}}/access-shortened?hash=sOGy3B
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
