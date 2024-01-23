@@ -1,10 +1,17 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  HttpCode,
+  NotFoundException,
+  Param,
+} from '@nestjs/common'
 import { PrismaService } from '@/prisma/prisma.service'
 @Controller('/')
 export class AccessUrlShortenedController {
   constructor(private prisma: PrismaService) {}
 
   @Get(':hash')
+  @HttpCode(200)
   async handle(@Param('hash') hash: string) {
     const hashAlreadyExists = await this.prisma.url.findFirst({
       where: {
