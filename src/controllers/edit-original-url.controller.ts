@@ -26,7 +26,7 @@ export class EditUrlController {
   constructor(private prisma: PrismaService) {}
 
   @Put()
-  @HttpCode(201)
+  @HttpCode(200)
   @UsePipes(new ZoodValidationPipe(editUrlBodySchema))
   async handle(@Body() body: EditUrlBodySchema) {
     const { urlId, newdestinyUrl } = body
