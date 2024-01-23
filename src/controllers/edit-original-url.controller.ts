@@ -34,6 +34,9 @@ export class EditUrlController {
     const url = await this.prisma.url.findFirst({
       where: {
         id: urlId,
+        deletedAt: {
+          equals: null,
+        },
       },
     })
 

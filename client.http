@@ -43,7 +43,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-    "urlId": "3887f4cf-12c8-4188-91dd-e5c99ed675f8",
+    "urlId": "c52f4a66-6492-43c0-83c6-76038da4b006",
     "newdestinyUrl": "https://app.rocketseat.com.br/classroom/nest-js/group/fundamentos-do-nest/lesson/criando-decorator-de-autenticacao"
 }
 
