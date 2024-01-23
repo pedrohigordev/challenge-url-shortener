@@ -25,7 +25,7 @@ export class DeleteUrlController {
   constructor(private prisma: PrismaService) {}
 
   @Delete()
-  @HttpCode(201)
+  @HttpCode(204)
   @UsePipes(new ZoodValidationPipe(deleteUrlQuerySchema))
   async handle(@Query() query: DeleteUrlQuerySchema) {
     const { urlId } = query
