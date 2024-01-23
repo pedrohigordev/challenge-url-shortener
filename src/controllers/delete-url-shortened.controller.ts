@@ -40,9 +40,12 @@ export class DeleteUrlController {
       throw new NotFoundException('URl not exists')
     }
 
-    await this.prisma.url.delete({
+    await this.prisma.url.update({
       where: {
         id: urlId,
+      },
+      data: {
+        deletedAt: new Date(),
       },
     })
   }
