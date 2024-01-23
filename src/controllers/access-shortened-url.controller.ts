@@ -1,28 +1,14 @@
-import { Controller, Get, NotFoundException, Query } from '@nestjs/common'
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
 import { PrismaService } from '@/prisma/prisma.service'
-import { z } from 'zod'
-
-const hashQuerySchema = z.object({
-  accessHash: z.string(),
-  url: z.string(),
-})
-
-type HashQuerySchema = z.infer<typeof hashQuerySchema>
-
-@Controller('/access-shortened')
+@Controller('/')
 export class AccessUrlShortenedController {
   constructor(private prisma: PrismaService) {}
 
-  @Get()
-  async handle(@Query() hash: HashQuerySchema) {
-    if (hash.url) {
-      const urlSplited = hash.url.split('/')
-      hash.accessHash = urlSplited[urlSplited.length - 1]
-    }
-
+  @Get(':hash')
+  async handle(@Param('hash') hash: string) {
     const hashAlreadyExists = await this.prisma.url.findFirst({
       where: {
-        hash: hash.accessHash,
+        hash,
         deletedAt: {
           equals: null,
         },
