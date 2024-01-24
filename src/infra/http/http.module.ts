@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { CreateAccountController } from './controllers/create-account.controller'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { UrlShortenerController } from './controllers/create-url-shortener.controller'
-import { EditUrlController } from './controllers/edit-original-url.controller'
+import { EditUrlController } from './controllers/update-original-url.controller'
 import { DeleteUrlController } from './controllers/delete-url-shortened.controller'
 import { ListUrlsController } from './controllers/list-urls.controller'
 import { AccessUrlShortenedController } from './controllers/access-shortened-url.controller'
@@ -11,6 +11,7 @@ import { RegisterUserUseCase } from '@/domain/user/application/use-cases/registe
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { RegisterUrlUseCase } from '@/domain/user/application/use-cases/register-urls'
 import { DeleteUrlUseCase } from '@/domain/user/application/use-cases/delete-urls'
+import { UpdateUrlUseCase } from '@/domain/user/application/use-cases/update-urls'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -23,6 +24,11 @@ import { DeleteUrlUseCase } from '@/domain/user/application/use-cases/delete-url
     ListUrlsController,
     AccessUrlShortenedController,
   ],
-  providers: [RegisterUserUseCase, RegisterUrlUseCase, DeleteUrlUseCase],
+  providers: [
+    RegisterUserUseCase,
+    RegisterUrlUseCase,
+    DeleteUrlUseCase,
+    UpdateUrlUseCase,
+  ],
 })
 export class HttpModule {}

@@ -36,8 +36,28 @@ export class PrismaUrlsRepository implements UrlsRepository {
     })
   }
 
-  update(updateInputUrl: UpdateInputUrl): Promise<void> {
-    throw new Error('Method not implemented.')
+  async update(updateInputUrl: UpdateInputUrl): Promise<void> {
+    const url = await this.prisma.url.findFirst({
+      where: {
+        id: updateInputUrl.urlId,
+        deletedAt: {
+          equals: null,
+        },
+      },
+    })
+
+    if (!url) {
+      throw new NotFoundException('URl not exists')
+    }
+
+    await this.prisma.url.update({
+      where: {
+        id: updateInputUrl.urlId,
+      },
+      data: {
+        original_url: updateInputUrl.newdestinyUrl,
+      },
+    })
   }
 
   listUrls(): Promise<Url[]> {
