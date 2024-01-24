@@ -5,7 +5,8 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { Env } from '@/infra/env/env'
 import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import * as shortid from 'shortid'
+import { Public } from '@/infra/auth/public'
+import { RegisterUrlUseCase } from '@/domain/user/application/use-cases/register-urls'
 
 interface OriginalUrl {
   url: string
@@ -17,37 +18,20 @@ export class UrlShortenerController {
   constructor(
     private prisma: PrismaService,
     private config: ConfigService<Env, true>,
+    private registerUrl: RegisterUrlUseCase,
   ) {}
-
-  private generateShortenedUrl(urlStandart: string, hash: string): string {
-    return `${urlStandart}/${hash}`
-  }
 
   @Post()
   @HttpCode(201)
+  @Public()
   async handle(@Body() body: OriginalUrl, @CurrentUser() user: UserPayload) {
     const { url } = body
-    const longId = shortid.generate()
-    const urlStandart = this.config.get('URL_STANDART', { infer: true })
-    const hash = longId.substring(0, 6)
 
-    const shortenedUrl = this.generateShortenedUrl(urlStandart, hash)
-
-    await this.prisma.url.create({
-      data: {
-        original_url: url,
-        hash,
-        user: {
-          connect: {
-            id: user.sub,
-          },
-        },
-      },
+    const result = await this.registerUrl.execute({
+      originalUrl: url,
+      userId: user.sub,
     })
 
-    return {
-      original_url: url,
-      shortened_url: shortenedUrl,
-    }
+    return result
   }
 }

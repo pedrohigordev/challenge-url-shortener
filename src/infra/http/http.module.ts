@@ -9,6 +9,7 @@ import { AccessUrlShortenedController } from './controllers/access-shortened-url
 import { DatabaseModule } from '../database/database.module'
 import { RegisterUserUseCase } from '@/domain/user/application/use-cases/register-users'
 import { CryptographyModule } from '../cryptography/cryptography.module'
+import { RegisterUrlUseCase } from '@/domain/user/application/use-cases/register-urls'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -21,6 +22,6 @@ import { CryptographyModule } from '../cryptography/cryptography.module'
     ListUrlsController,
     AccessUrlShortenedController,
   ],
-  providers: [RegisterUserUseCase],
+  providers: [RegisterUserUseCase, RegisterUrlUseCase],
 })
 export class HttpModule {}
