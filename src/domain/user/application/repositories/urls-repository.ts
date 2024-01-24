@@ -5,6 +5,16 @@ export interface ResponseUrlShortened {
   shortened_url: string
 }
 
+export interface UpdateInputUrl {
+  urlId: string
+  newdestinyUrl: string
+}
+
 export abstract class UrlsRepository {
+  abstract findUrlByurlId(urlId: string): Promise<Url>
   abstract create(url: Url): Promise<ResponseUrlShortened>
+  abstract delete(urlId: string): Promise<void>
+  abstract update(updateInputUrl: UpdateInputUrl): Promise<void>
+  abstract listUrls(): Promise<Url[]>
+  abstract acessUrl(hash: string): Promise<void>
 }

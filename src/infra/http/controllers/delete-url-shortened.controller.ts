@@ -2,7 +2,6 @@ import {
   Controller,
   Delete,
   HttpCode,
-  NotFoundException,
   Query,
   UseGuards,
   UsePipes,
@@ -11,8 +10,8 @@ import { z } from 'zod'
 
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { ApiTags } from '@nestjs/swagger'
+import { DeleteUrlUseCase } from '@/domain/user/application/use-cases/delete-urls'
 
 const deleteUrlQuerySchema = z.object({
   urlId: z.string(),
@@ -24,7 +23,7 @@ type DeleteUrlQuerySchema = z.infer<typeof deleteUrlQuerySchema>
 @UseGuards(JwtAuthGuard)
 @UsePipes(new ZoodValidationPipe(deleteUrlQuerySchema))
 export class DeleteUrlController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private deleteUrl: DeleteUrlUseCase) {}
 
   @Delete()
   @HttpCode(204)
@@ -32,23 +31,8 @@ export class DeleteUrlController {
   async handle(@Query() query: DeleteUrlQuerySchema) {
     const { urlId } = query
 
-    const url = await this.prisma.url.findFirst({
-      where: {
-        id: urlId,
-      },
-    })
-
-    if (!url) {
-      throw new NotFoundException('URl not exists')
-    }
-
-    await this.prisma.url.update({
-      where: {
-        id: urlId,
-      },
-      data: {
-        deletedAt: new Date(),
-      },
+    return await this.deleteUrl.execute({
+      urlId,
     })
   }
 }

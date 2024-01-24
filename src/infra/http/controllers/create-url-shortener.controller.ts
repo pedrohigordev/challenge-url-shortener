@@ -2,7 +2,6 @@ import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
-import { Public } from '@/infra/auth/public'
 import { RegisterUrlUseCase } from '@/domain/user/application/use-cases/register-urls'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 
@@ -21,8 +20,8 @@ export class UrlShortenerController {
     summary: 'Using this route it will be possible to shorten the URL.',
   })
   @HttpCode(201)
-  @Public()
   async handle(@Body() body: OriginalUrl, @CurrentUser() user: UserPayload) {
+    console.log(user)
     const { url } = body
 
     const result = await this.registerUrl.execute({

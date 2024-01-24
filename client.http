@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 
-# @name shorten_url
+# @name create_shorten_url
 POST {{baseUrl}}/shorten
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -50,7 +50,7 @@ Authorization: Bearer {{auth_token}}
 ###
 
 # @name delete_url
-DELETE  {{baseUrl}}/shorten?urlId=95d65fe1-6efd-45ab-8070-eea4a4af5351
+DELETE  {{baseUrl}}/shorten?urlId=5cddb76b-860d-44d2-8455-ac43a1a9738f
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 

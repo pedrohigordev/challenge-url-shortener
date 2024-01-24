@@ -8,6 +8,7 @@ export class PrismaUrlMapper {
       {
         originalUrl: raw.original_url,
         hash: raw.hash,
+        userId: raw.hash,
       },
 
       new UniqueEntityID(raw.id),
@@ -19,6 +20,7 @@ export class PrismaUrlMapper {
       id: url.id.toString(),
       original_url: url.original_url.toString(),
       hash: url.hash.toString(),
+      userId: url.userId.toString(),
     }
   }
 }

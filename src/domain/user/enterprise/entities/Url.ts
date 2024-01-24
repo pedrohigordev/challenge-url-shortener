@@ -4,7 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 export interface UrlProps {
   originalUrl: string
   hash: string
-  userId?: string
+  userId: string
 }
 
 export class Url extends Entity<UrlProps> {
