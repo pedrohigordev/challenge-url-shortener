@@ -13,6 +13,7 @@ import { RegisterUrlUseCase } from '@/domain/user/application/use-cases/register
 import { DeleteUrlUseCase } from '@/domain/user/application/use-cases/delete-urls'
 import { UpdateUrlUseCase } from '@/domain/user/application/use-cases/update-urls'
 import { ListUrlUseCase } from '@/domain/user/application/use-cases/list-urls'
+import { AccessUrlUseCase } from '@/domain/user/application/use-cases/access-urls'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -31,6 +32,7 @@ import { ListUrlUseCase } from '@/domain/user/application/use-cases/list-urls'
     DeleteUrlUseCase,
     UpdateUrlUseCase,
     ListUrlUseCase,
+    AccessUrlUseCase,
   ],
 })
 export class HttpModule {}

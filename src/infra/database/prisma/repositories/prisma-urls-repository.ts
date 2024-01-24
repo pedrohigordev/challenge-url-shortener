@@ -79,8 +79,28 @@ export class PrismaUrlsRepository implements UrlsRepository {
     })
   }
 
-  acessUrl(hash: string): Promise<void> {
-    throw new Error('Method not implemented.')
+  async acessUrl(hash: string): Promise<string> {
+    const hashAlreadyExists = await this.prisma.url.findFirst({
+      where: {
+        hash,
+        deletedAt: {
+          equals: null,
+        },
+      },
+    })
+
+    if (!hashAlreadyExists) throw new NotFoundException('Address not found.')
+
+    await this.prisma.url.update({
+      where: {
+        id: hashAlreadyExists.id,
+      },
+      data: {
+        visits: ++hashAlreadyExists.visits,
+      },
+    })
+
+    return hashAlreadyExists.original_url
   }
 
   async create(url: Url): Promise<any> {

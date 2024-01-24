@@ -16,5 +16,5 @@ export abstract class UrlsRepository {
   abstract delete(urlId: string): Promise<void>
   abstract update(updateInputUrl: UpdateInputUrl): Promise<void>
   abstract listUrls(userId: string): Promise<Url[]>
-  abstract acessUrl(hash: string): Promise<void>
+  abstract acessUrl(hash: string): Promise<string>
 }

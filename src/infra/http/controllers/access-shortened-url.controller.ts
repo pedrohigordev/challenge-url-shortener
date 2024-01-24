@@ -1,46 +1,18 @@
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
-import {
-  Controller,
-  Get,
-  HttpCode,
-  NotFoundException,
-  Param,
-} from '@nestjs/common'
+import { AccessUrlUseCase } from '@/domain/user/application/use-cases/access-urls'
+import { Controller, Get, HttpCode, Param, Res } from '@nestjs/common'
+import { Response } from 'express'
 import { ApiTags } from '@nestjs/swagger'
+
 @ApiTags('Access to URL controller')
 @Controller('/')
 export class AccessUrlShortenedController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private accessurl: AccessUrlUseCase) {}
 
   @Get(':hash')
   @HttpCode(200)
-  async handle(@Param('hash') hash: string) {
-    const hashAlreadyExists = await this.prisma.url.findFirst({
-      where: {
-        hash,
-        deletedAt: {
-          equals: null,
-        },
-      },
-      select: {
-        id: true,
-        original_url: true,
-        hash: true,
-        userId: true,
-        visits: true,
-        updatedAt: true,
-      },
-    })
+  async handle(@Param('hash') hash: string, @Res() res: Response) {
+    const result = await this.accessurl.execute(hash)
 
-    if (!hashAlreadyExists) throw new NotFoundException('Address not found.')
-
-    await this.prisma.url.update({
-      where: {
-        id: hashAlreadyExists.id,
-      },
-      data: {
-        visits: ++hashAlreadyExists.visits,
-      },
-    })
+    res.redirect(301, result)
   }
 }
