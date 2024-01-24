@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "name": "Fulano Sousa",
-    "email": "fulano@gmail.com",
+    "email": "fulano2@gmail.com",
     "password": "123456"
 }
 
@@ -19,7 +19,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "fulano@gmail.com",
+    "email": "fulano2@gmail.com",
     "password": "123456"
 }
 
@@ -66,6 +66,6 @@ Authorization: Bearer {{auth_token}}
 ###
 
 # @name access_url_shortened
-GET  {{baseUrl}}/erPODM
+GET  {{baseUrl}}/tXGvIf
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}

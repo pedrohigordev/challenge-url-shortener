@@ -1,8 +1,12 @@
 version: '3.8'
 
+networks:
+  url-shortener-net:
+    driver: bridge
+
 services:
   postgres:
-    container_name: pg-url-shortener
+    container_name: pg_url_shortener
     image: postgres
     ports:
       - 5432:5432
@@ -10,16 +14,5 @@ services:
       POSTGRES_USER: teddy-postgres
       POSTGRES_PASSWORD: teddy@2024
       POSTGRES_DB: shortener-db
-      PGDATA: /data/postgres
-    volumes:
-      - ./data/pg:/data/postgres
-
-  nestjs-app:
-    container_name: nestjs-url-shortener
-    build:
-      context: .
-      dockerfile: Dockerfile  
-    ports:
-      - 3000:3000  
-    depends_on:
-      - postgres  
+    networks:
+      - url-shortener-net
