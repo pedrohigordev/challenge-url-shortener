@@ -1,4 +1,3 @@
-I
 ## Challenge teddy
 
 ## 🚀 Começando
@@ -8,13 +7,27 @@ I
 - **[Node.JS](https://www.python.org/downloads/release/python-392/)**
 - **[Docker](https://docs.docker.com/desktop/)** e **[Docker Compose](https://docs.docker.com/compose/)**
 - **[Git](https://git-scm.com/)**
+- **[NVM](https://github.com/nvm-sh/nvm)**
 
 ## ⚙️ Executando o projeto
 
-Após realizar o download, você deve navegar até a pasta raíz do projeto e inicializar o banco de dados com o comando
+Para executar o projeto com a versão correta do nodejs, execute o comando:
+```
+nvm install
+```
+
+Após isso, inicialize o banco de dados com o comando:
 
 ```
 docker compose up -d 
+```
+
+Agora precisamos executar as migrations do prisma, e para isso vamos utilizar o comando:
+
+OBS: Caso esteja utilizando algum gerenciador de pacotes diferente do PNPM, basta trocar pnpm pelo seu gerenciador de pacotes
+
+```
+pnpm prisma migrate dev
 ```
 
 ### Testes
@@ -24,8 +37,11 @@ docker compose up -d
 
 #### Testes E2E
 Para a execução dos testes E2E deve-se rodar os testes com o comando: 
+OBS: Caso esteja utilizando algum gerenciador de pacotes diferente do PNPM, basta trocar pnpm pelo seu gerenciador de pacotes
 
-```` cmd command ``
+```
+pnpm run test:e2e
+```
 
 # RF
 
