@@ -22,7 +22,7 @@
 <p align="center">
   <h2>Acesse o documento do desafio</h2>
   <a href="https://docs.google.com/document/d/1eZpPju0EHUO5tzGgi3J3G0dtGX8G9i6eh1FU39WYg2M/editt" target="_blank">
-    <img align="center" src="https://docs.google.com/document/d/1eZpPju0EHUO5tzGgi3J3G0dtGX8G9i6eh1FU39WYg2M/edit" alt="documento do google docs"/>
+    <img align="center" src="https://teddydigital.io/wp-content/uploads/2023/10/logo-preto-2048x992.png" alt="documento do google docs"/>
   </a>
 </p>
 
