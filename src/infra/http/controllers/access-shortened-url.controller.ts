@@ -6,7 +6,8 @@ import {
   NotFoundException,
   Param,
 } from '@nestjs/common'
-
+import { ApiTags } from '@nestjs/swagger'
+@ApiTags('Access to URL controller')
 @Controller('/')
 export class AccessUrlShortenedController {
   constructor(private prisma: PrismaService) {}

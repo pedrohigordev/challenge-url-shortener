@@ -12,6 +12,7 @@ import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
 import { Public } from '@/infra/auth/public'
 import { UserAlreadyExistsError } from '@/domain/user/application/use-cases/errors/users-already-exists-error'
 import { RegisterUserUseCase } from '@/domain/user/application/use-cases/register-users'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 const createAccountBodySchema = z.object({
   name: z.string(),
@@ -22,11 +23,17 @@ const createAccountBodySchema = z.object({
 type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
 
 @Controller('/accounts')
+@ApiTags('Create Account Controller')
 @Public()
 export class CreateAccountController {
   constructor(private registerUser: RegisterUserUseCase) {}
 
   @Post()
+  @ApiOperation({
+    summary:
+      'Here it will be possible to create a user, using name, email and password',
+  })
+  @ApiResponse({ status: 201, description: 'Success' })
   @HttpCode(201)
   @UsePipes(new ZoodValidationPipe(createAccountBodySchema))
   async handle(@Body() body: CreateAccountBodySchema) {

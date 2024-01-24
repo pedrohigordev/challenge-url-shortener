@@ -12,13 +12,14 @@ import { z } from 'zod'
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { ApiTags } from '@nestjs/swagger'
 
 const deleteUrlQuerySchema = z.object({
   urlId: z.string(),
 })
 
 type DeleteUrlQuerySchema = z.infer<typeof deleteUrlQuerySchema>
-
+@ApiTags('Delete shortened url controller')
 @Controller('/shorten')
 @UseGuards(JwtAuthGuard)
 @UsePipes(new ZoodValidationPipe(deleteUrlQuerySchema))

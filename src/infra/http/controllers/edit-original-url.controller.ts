@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
+import { ApiTags } from '@nestjs/swagger'
 
 const editUrlBodySchema = z.object({
   urlId: z.string(),
@@ -18,7 +19,7 @@ const editUrlBodySchema = z.object({
 })
 
 type EditUrlBodySchema = z.infer<typeof editUrlBodySchema>
-
+@ApiTags('Edit URL controller')
 @Controller('/shorten')
 @UseGuards(JwtAuthGuard)
 @UsePipes(new ZoodValidationPipe(editUrlBodySchema))

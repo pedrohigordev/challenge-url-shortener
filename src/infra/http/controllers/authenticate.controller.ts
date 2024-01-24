@@ -11,6 +11,7 @@ import { compare } from 'bcryptjs'
 import { z } from 'zod'
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { ApiTags } from '@nestjs/swagger'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -19,6 +20,7 @@ const authenticateBodySchema = z.object({
 
 type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
+@ApiTags('Authenticate Controller')
 @Controller('/sessions')
 export class AuthenticateController {
   constructor(

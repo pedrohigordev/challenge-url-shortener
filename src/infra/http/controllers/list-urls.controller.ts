@@ -3,7 +3,8 @@ import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common'
-
+import { ApiTags } from '@nestjs/swagger'
+@ApiTags('List URls controller')
 @Controller('/shorten')
 @UseGuards(JwtAuthGuard)
 export class ListUrlsController {
