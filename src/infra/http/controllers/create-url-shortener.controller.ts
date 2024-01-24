@@ -21,7 +21,6 @@ export class UrlShortenerController {
   })
   @HttpCode(201)
   async handle(@Body() body: OriginalUrl, @CurrentUser() user: UserPayload) {
-    console.log(user)
     const { url } = body
 
     const result = await this.registerUrl.execute({

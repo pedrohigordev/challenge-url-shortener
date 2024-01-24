@@ -22,8 +22,6 @@ export class PrismaUrlsRepository implements UrlsRepository {
   async delete(urlId: string): Promise<void> {
     const url = await this.findUrlByurlId(urlId)
 
-    console.log(url)
-
     if (!url) {
       throw new NotFoundException('URl not exists')
     }

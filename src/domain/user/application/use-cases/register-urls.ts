@@ -22,7 +22,6 @@ export class RegisterUrlUseCase {
   }
 
   async execute({ originalUrl, userId }: RegisterUrlUseCaseRequest) {
-    console.log(userId)
     const longId = shortid.generate()
     const urlStandart = this.config.get('URL_STANDART', { infer: true })
     const hash = longId.substring(0, 6)
