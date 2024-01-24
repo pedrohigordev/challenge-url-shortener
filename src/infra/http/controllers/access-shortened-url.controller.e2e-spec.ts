@@ -23,7 +23,7 @@ describe('Access shortened url (E2E)', () => {
     await app.init()
   })
 
-  test('[DELETE] /shorten', async () => {
+  test('[GET] /shorten', async () => {
     const userId = randomUUID()
     const urlId = randomUUID()
 
@@ -56,7 +56,8 @@ describe('Access shortened url (E2E)', () => {
       },
     })
 
-    expect(response.statusCode).toBe(200)
+    expect(response.statusCode).toBeGreaterThanOrEqual(301)
     expect(numberOfVisits?.visits).toEqual(1)
+    expect(response.header.location).toBeDefined()
   })
 })
