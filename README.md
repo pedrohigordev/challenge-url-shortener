@@ -9,6 +9,9 @@
 - **[Git](https://git-scm.com/)**
 - **[NVM](https://github.com/nvm-sh/nvm)**
 
+## Sobre o projeto
+### Arquitetura: Clean Architecture
+
 ## ⚙️ Executando o projeto
 
 Para executar o projeto com a versão correta do nodejs, execute o comando:
