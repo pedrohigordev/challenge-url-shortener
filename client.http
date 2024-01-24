@@ -2,6 +2,10 @@
 
 @auth_token = {{authenticate.response.body.access_token}}
 
+####################################################################################################
+# O Objetivo desta rota [e realizar o cadastro do usuário na aplicação
+####################################################################################################
+
 # @name create_account
 POST {{baseUrl}}/accounts
 Content-Type: application/json
@@ -12,7 +16,10 @@ Content-Type: application/json
     "password": "123456"
 }
 
-###
+####################################################################################################
+# O Objetivo desta rota é realizar a autenticação do usuário
+# OBS: Após a realização da autenticação com sucesso o access_token é preenchido automaticamente
+####################################################################################################
 
 # @name authenticate
 POST {{baseUrl}}/sessions
@@ -23,7 +30,9 @@ Content-Type: application/json
     "password": "123456"
 }
 
-###
+####################################################################################################
+# O Objetivo desta rota é realizar o encurtamento da URL
+####################################################################################################
 
 # @name create_shorten_url
 POST {{baseUrl}}/shorten
@@ -35,7 +44,11 @@ Authorization: Bearer {{auth_token}}
 }
 
 
-###
+####################################################################################################
+# O Objetivo desta rota é realizar a atualização do endereço de origem da rota
+# OBS: Primeiro você tem que adquerir o ID da URL, que pode ser na rota de listagem de URLS
+# ou acessando o banco de dados
+####################################################################################################
 
 # @name update_url_destiny
 PUT {{baseUrl}}/shorten
@@ -47,7 +60,11 @@ Authorization: Bearer {{auth_token}}
     "newdestinyUrl": "https://github.com/pedrohigordev/challenge-url-shortener"
 }
 
-###
+####################################################################################################
+# O Objetivo desta rota é realizar o soft delete da URL cadastrada
+# OBS: Primeiro você tem que adquerir o ID da URL, que pode ser na rota de listagem de URLS
+# ou acessando o banco de dados
+####################################################################################################
 
 # @name delete_url
 DELETE  {{baseUrl}}/shorten?urlId=2f5d76f3-f871-4af7-a7f1-6386b5bba35f
@@ -55,7 +72,9 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 
-###
+####################################################################################################
+# O Objetivo desta rota é listar todas as URls do usuário autenticado
+####################################################################################################
 
 # @name list_urls
 GET  {{baseUrl}}/shorten
@@ -63,7 +82,9 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 
-###
+####################################################################################################
+# O Objetivo desta rota é realizar o acesso e redirecionamento da Url encurtada através do hash
+####################################################################################################
 
 # @name access_url_shortened
 GET  {{baseUrl}}/tXGvIf

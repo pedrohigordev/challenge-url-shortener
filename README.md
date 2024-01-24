@@ -1,6 +1,6 @@
 ## Challenge teddy
 
-## 🚀 Começando
+### 🚀 Começando
 
 ### 📋 Pré-requisitos obrigatórios
 
@@ -34,6 +34,8 @@ pnpm prisma migrate dev
 ### Os testes podem ser realizados utilizando o REST CLIENT:
 
 - **[Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)**
+
+Após a instalação da extensão, acesse o arquivo: client.http que está na raiz do projeto
 
 #### Testes E2E
 Para a execução dos testes E2E deve-se rodar os testes com o comando: 
