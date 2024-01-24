@@ -9,7 +9,7 @@ import {
 import { z } from 'zod'
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { UpdateUrlUseCase } from '@/domain/user/application/use-cases/update-urls'
 
 const editUrlBodySchema = z.object({
@@ -26,6 +26,9 @@ export class EditUrlController {
   constructor(private updateUrls: UpdateUrlUseCase) {}
 
   @Put()
+  @ApiOperation({
+    summary: 'How can you update the original URL?',
+  })
   @HttpCode(200)
   @UsePipes(new ZoodValidationPipe(editUrlBodySchema))
   async handle(@Body() body: EditUrlBodySchema) {

@@ -43,14 +43,14 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-    "urlId": "6e721490-afe8-4a31-91fd-84410665dc9f",
-    "newdestinyUrl": "https://app.rocketseat.com.br/classroom/nest-js/group/fundamentos-do-nest/lesson/criando-decorator-de-autenticacao"
+    "urlId": "0350be3f-5ce3-409e-8299-08d8f8d5f0d9",
+    "newdestinyUrl": "https://github.com/pedrohigordev/challenge-url-shortener"
 }
 
 ###
 
 # @name delete_url
-DELETE  {{baseUrl}}/shorten?urlId=5263e974-1447-46dd-9ae8-e859ebe09ff0
+DELETE  {{baseUrl}}/shorten?urlId=2f5d76f3-f871-4af7-a7f1-6386b5bba35f
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 

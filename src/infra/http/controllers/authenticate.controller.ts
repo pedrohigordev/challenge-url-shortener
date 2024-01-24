@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common'
 import { z } from 'zod'
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { WrongCredentialsError } from '@/domain/user/application/use-cases/errors/wrong-credentials-error'
 import { AuthenticateUserUseCase } from '@/domain/user/application/use-cases/authenticate-users'
 
@@ -26,6 +26,9 @@ export class AuthenticateController {
   constructor(private authenticateUser: AuthenticateUserUseCase) {}
 
   @Post()
+  @ApiOperation({
+    summary: 'The purpose of this route is to perform user authentication',
+  })
   @HttpCode(200)
   @UsePipes(new ZoodValidationPipe(authenticateBodySchema))
   async handle(@Body() body: AuthenticateBodySchema) {
