@@ -27,7 +27,7 @@ docker compose up -d
 
 Agora precisamos executar as migrations do prisma, e para isso vamos utilizar o comando:
 
-OBS: Caso esteja utilizando algum gerenciador de pacotes diferente do PNPM, basta trocar pnpm pelo seu gerenciador de pacotes
+- OBS: Caso esteja utilizando algum gerenciador de pacotes diferente do PNPM, basta trocar pnpm pelo seu gerenciador de pacotes
 
 ```
 pnpm prisma migrate dev
@@ -42,7 +42,7 @@ Após a instalação da extensão, acesse o arquivo: client.http que está na ra
 
 #### Testes E2E
 Para a execução dos testes E2E deve-se rodar os testes com o comando: 
-OBS: Caso esteja utilizando algum gerenciador de pacotes diferente do PNPM, basta trocar pnpm pelo seu gerenciador de pacotes
+- OBS: Caso esteja utilizando algum gerenciador de pacotes diferente do PNPM, basta trocar pnpm pelo seu gerenciador de pacotes
 
 ```
 pnpm run test:e2e
