@@ -14,7 +14,7 @@
 
 ## ⚙️ Executando o projeto
 
-Para executar o projeto com a versão correta do nodejs, execute o comando:
+Para executar o projeto com a versão correta do nodejs, execute na raiz do projeto o comando:
 ```
 nvm install
 ```
