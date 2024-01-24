@@ -1,33 +1,20 @@
+import { ListUrlUseCase } from '@/domain/user/application/use-cases/list-urls'
 import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 @ApiTags('List URls controller')
 @Controller('/shorten')
 @UseGuards(JwtAuthGuard)
 export class ListUrlsController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private listUrls: ListUrlUseCase) {}
 
   @Get()
   @HttpCode(200)
   async handle(@CurrentUser() user: UserPayload) {
-    return await this.prisma.url.findMany({
-      where: {
-        userId: user.sub,
-        deletedAt: {
-          equals: null,
-        },
-      },
-      select: {
-        id: true,
-        original_url: true,
-        hash: true,
-        userId: true,
-        visits: true,
-        updatedAt: true,
-      },
-    })
+    const result = await this.listUrls.execute(user.sub)
+
+    return result
   }
 }

@@ -60,8 +60,23 @@ export class PrismaUrlsRepository implements UrlsRepository {
     })
   }
 
-  listUrls(): Promise<Url[]> {
-    throw new Error('Method not implemented.')
+  async listUrls(userId: string): Promise<any> {
+    return await this.prisma.url.findMany({
+      where: {
+        userId,
+        deletedAt: {
+          equals: null,
+        },
+      },
+      select: {
+        id: true,
+        original_url: true,
+        hash: true,
+        userId: true,
+        visits: true,
+        updatedAt: true,
+      },
+    })
   }
 
   acessUrl(hash: string): Promise<void> {
