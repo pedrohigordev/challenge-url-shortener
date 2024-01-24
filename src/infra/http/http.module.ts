@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { CreateAccountController } from './controllers/create-account.controller'
-import { AuthenticateController } from './controllers/authenticate.controller'
 import { UrlShortenerController } from './controllers/create-url-shortener.controller'
 import { EditUrlController } from './controllers/update-original-url.controller'
 import { DeleteUrlController } from './controllers/delete-url-shortened.controller'
@@ -14,6 +13,8 @@ import { DeleteUrlUseCase } from '@/domain/user/application/use-cases/delete-url
 import { UpdateUrlUseCase } from '@/domain/user/application/use-cases/update-urls'
 import { ListUrlUseCase } from '@/domain/user/application/use-cases/list-urls'
 import { AccessUrlUseCase } from '@/domain/user/application/use-cases/access-urls'
+import { AuthenticateController } from './controllers/authenticate.controller'
+import { AuthenticateUserUseCase } from '@/domain/user/application/use-cases/authenticate-users'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -33,6 +34,7 @@ import { AccessUrlUseCase } from '@/domain/user/application/use-cases/access-url
     UpdateUrlUseCase,
     ListUrlUseCase,
     AccessUrlUseCase,
+    AuthenticateUserUseCase,
   ],
 })
 export class HttpModule {}

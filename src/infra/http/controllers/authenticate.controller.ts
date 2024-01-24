@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   HttpCode,
@@ -6,12 +7,11 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
-import { compare } from 'bcryptjs'
 import { z } from 'zod'
 import { ZoodValidationPipe } from '../pipes/zod-validation-pipe'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { ApiTags } from '@nestjs/swagger'
+import { WrongCredentialsError } from '@/domain/user/application/use-cases/errors/wrong-credentials-error'
+import { AuthenticateUserUseCase } from '@/domain/user/application/use-cases/authenticate-users'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -23,10 +23,7 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 @ApiTags('Authenticate Controller')
 @Controller('/sessions')
 export class AuthenticateController {
-  constructor(
-    private prisma: PrismaService,
-    private jwt: JwtService,
-  ) {}
+  constructor(private authenticateUser: AuthenticateUserUseCase) {}
 
   @Post()
   @HttpCode(200)
@@ -34,23 +31,23 @@ export class AuthenticateController {
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body
 
-    const user = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
+    const result = await this.authenticateUser.execute({
+      email,
+      password,
     })
 
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials.')
+    if (result.isLeft()) {
+      const error = result.value
+
+      switch (error.constructor) {
+        case WrongCredentialsError:
+          throw new UnauthorizedException(error.message)
+        default:
+          throw new BadRequestException(error.message)
+      }
     }
 
-    const isPasswordValid = await compare(password, user.password)
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials.')
-    }
-
-    const accessToken = this.jwt.sign({ sub: user.id })
+    const { accessToken } = result.value
 
     return {
       access_token: accessToken,
