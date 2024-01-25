@@ -84,6 +84,7 @@ Authorization: Bearer {{auth_token}}
 
 ####################################################################################################
 # O Objetivo desta rota é realizar o acesso e redirecionamento da Url encurtada através do hash
+# Se possível, copie o código hash e coloque nos outre params
 ####################################################################################################
 
 # @name access_url_shortened
