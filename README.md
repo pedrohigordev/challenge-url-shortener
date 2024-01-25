@@ -14,7 +14,8 @@
 
 ## ⚙️ Executando o projeto
 
-OBS: Para evitar trabalho por parte do avaliador, decidi enviar as credenciais diretamente, pois criar a chave publica e cave privada pode gerar um tempo a mais.
+OBS: Para evitar trabalho por parte do avaliador, decidi enviar as credenciais diretamente, pois criar a chave publica e chave privada pode gerar um tempo a mais,
+logo, gerei a chave public e privada a partir de uma máquina virtual que não pode ser acessada, diminuindo os riscos de segurança.
 
 Crie um arquivo .env na raiz do projeto, com as seguintes credenciais:
 
